@@ -16,21 +16,75 @@
       crossorigin="anonymous"
     />
     <style>
-      #spinner{
-        background: #000;
+      #spinner {
+        background: rgba(0, 0, 0 ,0.5);
         width: 100vw;
         height: 100vh;
         position: fixed;
-        top: 0;
-        left: 0;
+        top: 50;
+        left: 50;
         z-index: 1;
+        display: flex;
+        align-items: center;
       }
+      .spinner {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
 
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #333;
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 5.0s infinite ease-in-out;
+  animation: sk-bounce 5.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: 2s;
+  animation-delay: 5s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
     </style>
   </head>
 
   <body>
-    <div id="spinner"></div>    
+    <div id="spinner" class="loader">
+      <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
+    </div>
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -72,9 +126,7 @@
         </div>
       </nav>
 
-      <header class="display-4 my-4">
-        Thực hành javascript - axios
-      </header>
+      <header class="display-4 my-4">Thực hành javascript - axios</header>
       <!-- Phan tab menu -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
@@ -86,13 +138,12 @@
             >Danh sách sản phẩm</a
           >
         </li>
-        
       </ul>
       <br />
       <!-- Tab panes -->
       <div class="tab-content">
         <!--Danh sách sản phẩm -->
-        <div role="tabpanel" class="tab-pane  in active" id="DanhSachSP">
+        <div role="tabpanel" class="tab-pane in active" id="DanhSachSP">
           <div class="row">
             <div class="col-md-8">
               <!-- BEGIN BUTTOM THÊM MỚI -->
@@ -135,7 +186,7 @@
                 <th>Tên Sản Phẩm</th>
                 <th>Giá</th>
                 <th>Hình Ảnh</th>
-                <th>Mô Tả</th>                
+                <th>Mô Tả</th>
                 <th>Action</th>
               </thead>
               <tbody id="tblDanhSachSP"></tbody>
@@ -144,7 +195,7 @@
           </div>
           <br />
         </div>
-        <!-- Kết thúc danh sách sản phẩm -->       
+        <!-- Kết thúc danh sách sản phẩm -->
       </div>
 
       <!--KetThuc Tabmenu-->
@@ -177,7 +228,7 @@
                   class="form-control"
                   placeholder="Nhập vào giá"
                 />
-              </div>             
+              </div>
               <div class="form-group">
                 <label>Hình Ảnh</label>
                 <input
@@ -194,16 +245,20 @@
                   <option value="other">Other</option>
                 </select> -->
                 <input
-                id="MoTaSP"
-                class="form-control"
-                placeholder="Nhập vào mô tả sản phẩm"
-              />
+                  id="MoTaSP"
+                  class="form-control"
+                  placeholder="Nhập vào mô tả sản phẩm"
+                />
               </div>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button onclick="createProduct()" class="btn btn-success">Add</button>
-              <button onclick="updateProduct()" class="btn btn-warning">Update</button>
+              <button onclick="createProduct()" class="btn btn-success">
+                Add
+              </button>
+              <button onclick="updateProduct()" class="btn btn-warning">
+                Update
+              </button>
             </div>
           </div>
         </div>
@@ -237,10 +292,14 @@
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-
-     <!-- axios -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js" integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   <!-- my js -->
-   <script src="../controllers/controllers.js"></script>
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+      integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- my js -->
+    <script src="../controllers/controllers.js"></script>
   </body>
 </html>
